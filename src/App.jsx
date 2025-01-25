@@ -5,7 +5,7 @@ import Game from "./components/Game";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/math-pack">
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/settings" element={<Settings />} />
