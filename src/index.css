@@ -191,6 +191,12 @@ input[type="checkbox"]:hover {
   filter: brightness(1.2); /* Slightly brighten on hover */
 }
 
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #2e2e38;

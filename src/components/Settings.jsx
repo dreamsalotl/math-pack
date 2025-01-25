@@ -22,56 +22,77 @@ function Settings() {
 
   const validateAndNavigate = () => {
     const hasAtLeastOneOperator =
-      settings.addition || settings.subtraction || settings.multiplication || settings.division;
+      settings.addition ||
+      settings.subtraction ||
+      settings.multiplication ||
+      settings.division;
 
     if (!hasAtLeastOneOperator) {
       setErrorMessage("Please select at least one operator to start the game.");
-      return false; // Prevent navigation
+      return false;
     }
 
-    setErrorMessage(""); // Clear any previous error
-    return true; // Allow navigation
+    if (digits <= 0) {
+      setErrorMessage("Number of digits must be greater than 0.");
+      return false;
+    }
+
+    setErrorMessage(""); // Clear previous errors
+    return true;
   };
 
   return (
     <div className="main-container">
-              <Link to="/">
-          <button>Back to Home</button>
-        </Link>
+      <Link to="/">
+        <button>Back to Home</button>
+      </Link>
       <h2>Arithmetic Settings</h2>
       <div id="checkbox-box">
-      <label>
-        <input
-          type="checkbox"
-          checked={settings.addition}
-          onChange={() => toggleSetting("addition")}
-        />{" "}
-        Addition
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={settings.subtraction}
-          onChange={() => toggleSetting("subtraction")}
-        />{" "}
-        Subtraction
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={settings.multiplication}
-          onChange={() => toggleSetting("multiplication")}
-        />{" "}
-        Multiplication
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          checked={settings.division}
-          onChange={() => toggleSetting("division")}
-        />{" "}
-        Division
-      </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.addition}
+            onChange={() => toggleSetting("addition")}
+          />{" "}
+          Addition
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.subtraction}
+            onChange={() => toggleSetting("subtraction")}
+          />{" "}
+          Subtraction
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.multiplication}
+            onChange={() => toggleSetting("multiplication")}
+          />{" "}
+          Multiplication
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.division}
+            onChange={() => toggleSetting("division")}
+          />{" "}
+          Division
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            checked={settings.allowNegatives}
+            onChange={() =>
+              setSettings((prev) => ({
+                ...prev,
+                allowNegatives: !prev.allowNegatives,
+              }))
+            }
+          />
+          Allow Negative Numbers
+        </label>
       </div>
       <div id="digit-bar">
         <label>
@@ -89,15 +110,20 @@ function Settings() {
       <div>
         <Link
           to="/game"
-          state={{ operators: settings, digits }}
+          state={{
+            operators: settings,
+            digits,
+            allowNegatives: settings.allowNegatives,
+          }}
           onClick={(e) => {
             if (!validateAndNavigate()) {
-              e.preventDefault(); // Stop navigation
+              e.preventDefault(); // Prevent navigation if validation fails
             }
           }}
         >
           <button>Start Game</button>
         </Link>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
       </div>
     </div>
   );
