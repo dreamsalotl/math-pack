@@ -1,0 +1,216 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: #eaeaea; /* Softer text color */
+  background-color: #1e1e2f; /* Deep neutral dark theme */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #87bfff; /* Softer blue for links */
+  text-decoration: inherit;
+}
+a:hover {
+  color: #6faedf; /* Slightly darker on hover */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #1e1e2f; /* Deep neutral for dark mode */
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: #eaeaea; /* Softer text for dark mode */
+}
+
+.main-container {
+  text-align: center;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  background-color: #29293d; /* Slightly lighter for the main container */
+  color: #eaeaea; /* Matching light text */
+  max-width: 600px;
+  width: 90%;
+}
+
+h1,
+h2 {
+  color: #d1d1e0; /* Softer heading color */
+  text-align: center;
+}
+
+#problem-box, #score-box, #streak-box {
+  text-align: center;
+}
+
+#checkbox-box {
+  padding-bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+#digit-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 15px;
+}
+
+/* Feedback Styling */
+.feedback {
+  position: fixed; /* Keeps it in place relative to the viewport */
+  top: 10%; /* Adjust placement vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, 0); /* Correct centering offset */
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+  color: #fff; /* Light text for contrast */
+  padding: 0.8em 1.5em;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000; /* Keep it above everything else */
+  opacity: 0; /* Initially invisible */
+  transition: opacity 0.3s ease-in-out; /* Smooth fade-in/out */
+}
+
+.feedback.show {
+  opacity: 1; /* Visible when the "show" class is added */
+}
+
+
+button {
+  border-radius: 8px;
+  border: 1px solid #3c3c5c;
+  padding: 0.8em 1.5em;
+  font-size: 1rem;
+  font-weight: 500;
+  background-color: #2a2a3d; /* Softer dark background for buttons */
+  color: #eaeaea; /* Button text matches general text */
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+button:hover {
+  background-color: #3a3a4f; /* Slightly lighter hover effect */
+  border-color: #646cff;
+  color: #ffffff; /* Brighter text on hover */
+}
+button:focus,
+button:focus-visible {
+  outline: 3px solid #87bfff; /* Softer focus outline */
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em; /* Space between input and button */
+  margin-bottom: 1em; /* Space below the container */
+}
+
+/* Text Input Styling */
+input[type="number"] {
+  width: 60%; /* Adjust size relative to container */
+  padding: 0.8em;
+  font-size: 1rem;
+  border: 1px solid #3c3c5c;
+  border-radius: 8px;
+  background-color: #2a2a3d; /* Match buttons for consistency */
+  color: #eaeaea; /* Match text color */
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+input[type="number"]:focus {
+  outline: 3px solid #87bfff; /* Add a focus effect */
+  border-color: #646cff;
+  background-color: #3a3a4f; /* Slightly lighter focus background */
+}
+
+/* Skip Button Placement */
+button.skip-button {
+  display: block;
+  margin: 1em auto 0; /* Center the button and add spacing */
+  width: 80%; /* Match width with input and other buttons */
+  padding: 0.8em;
+  background-color: #2a2a3d; /* Match the main button styles */
+  border: 1px solid #3c3c5c;
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #eaeaea;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button.skip-button:hover {
+  background-color: #3a3a4f; /* Hover effect */
+  border-color: #646cff;
+}
+
+#game-nav-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+/* Style the labels for better spacing and usability */
+label {
+  display: flex;
+  align-items: center; /* Align checkbox and text */
+  margin: 10px 0; /* Add spacing between options */
+  font-size: 1.2rem; /* Slightly larger text */
+  cursor: pointer; /* Make it clear that labels are clickable */
+}
+
+/* Style the checkboxes themselves */
+input[type="checkbox"] {
+  width: 1.5em; /* Larger width */
+  height: 1.5em; /* Larger height */
+  margin-right: 10px; /* Space between checkbox and label text */
+  accent-color: #646cff; /* Modern browsers support custom checkbox colors */
+  cursor: pointer; /* Ensure the checkbox itself is clickable */
+}
+
+/* Optional: Add a hover effect for desktop users */
+input[type="checkbox"]:hover {
+  filter: brightness(1.2); /* Slightly brighten on hover */
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #2e2e38;
+    background-color: #f5f5fa;
+  }
+  body {
+    background-color: #f5f5fa;
+    color: #2e2e38;
+  }
+  .main-container {
+    background-color: #ffffff;
+    color: #2e2e38;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  button {
+    background-color: #f0f0f5;
+    color: #2e2e38;
+  }
+  button:hover {
+    background-color: #e1e1ea;
+    border-color: #747bff;
+  }
+}
