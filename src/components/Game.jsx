@@ -27,27 +27,34 @@ function Game() {
     if (operators.division) availableOperators.push("/");
   
     if (availableOperators.length === 0) {
-      setFeedbackMessage("No operators selected. Please adjust settings.");
+      setFeedbackMessage("Please select at least one operator to start the game.");
       setFeedbackColor("red");
       setFeedbackVisible(true);
       setTimeout(() => setFeedbackVisible(false), 1500); // Auto-hide feedback
       return;
     }
   
-    // Helper function to generate numbers with or without negatives
+    // Helper function to generate random numbers
     const generateRandomNumber = () => {
       const max = Math.pow(10, digits);
-      const min = allowNegatives ? -max : 0; // Adjust minimum value for negatives
-      return Math.floor(Math.random() * (max - min)) + min; // Random between min and max
+      const min = allowNegatives ? -max : 0; // If negatives are allowed, include negative range
+      return Math.floor(Math.random() * (max - min)) + min; // Random number between min and max
     };
   
-    const num1 = generateRandomNumber();
-    const num2 = generateRandomNumber();
+    let num1 = generateRandomNumber();
+    let num2 = generateRandomNumber();
     const operator =
       availableOperators[Math.floor(Math.random() * availableOperators.length)];
   
+    // Ensure correct ordering for subtraction and division when negatives are disabled
+    if (!allowNegatives && (operator === "-" || operator === "/")) {
+      if (num1 < num2) {
+        [num1, num2] = [num2, num1]; // Swap numbers to prevent negatives
+      }
+    }
+  
     let answer = eval(`${num1} ${operator} ${num2}`);
-    if (operator === "/") answer = Math.round(answer);
+    if (operator === "/") answer = Math.round(answer); // Round division answers
   
     setProblem({ num1, num2, operator, answer });
     setFeedbackMessage(""); // Clear feedback
